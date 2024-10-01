@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+    <title>Document</title>
+</head>
+<body>
+    {% include "nav.html" %}
+{% load socialaccount %}
+{% block content %}
+
+
+<div class="wrapper">
+    <div class="container">
+        <div class="login">
+       
+            <div class="LoginMiddle">
+                <div class="LoginTop">
+                    <h2>Login to your account</h2>
+                </div>
+
+                <div class="l-top">
+                    <div class="input-group">
+                        <button class="google-btn">
+                           <img src="../../static/images/google.png" alt="">Login with Google
+                        </button>
+                    </div>
+                </div>
+
+
+                <form action="{% url 'account_login' %}" method="POST" class="my-auto">
+                {% csrf_token %}
+                
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="username" name="username" placeholder="Email Address" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+
+                    <button type="submit" class="login-btn">Login</button>
+                
+                    <div class="l-bot">
+                        <p>
+                            Don't have an account? <a href="{{ signup_url }}">REGISTER</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>  
+        <div class="pic">
+            <img src="../../static/images/lala-logo.jpg" alt="logo">
+        </div>
+    </div>
+</div>
+
+
+
+{%endblock%}
+
+
+
+
+</body>
+</html>
