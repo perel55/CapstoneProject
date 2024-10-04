@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'barangay',
 
+    'django.contrib.sites', 
     'allauth',
     'allauth.account',
     'allauth.socialaccount',

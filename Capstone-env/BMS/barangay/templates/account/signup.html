@@ -24,7 +24,8 @@
               <div class="LoginTop">
                   <h2>Create Account</h2>
               </div>
-              <form action="{% url 'account_signup' %}" method="POST" class="my-auto">
+
+              <form action="/register" method="post">
                  {% csrf_token %}
                 <div class="input-group">
                     <input type="text" id="username" name="username" placeholder="Username" required>
@@ -46,6 +47,7 @@
                     </p>
                 </div>
             </form>
+
           </div>
         </div>  
         <div class="pic">
