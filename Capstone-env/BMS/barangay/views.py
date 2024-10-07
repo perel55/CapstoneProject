@@ -89,9 +89,23 @@ def login(request):
     return render(request, 'master.html')  
 
 
+def admindashboard(request):
+    return render(request, 'admin/admin.html')
 
+def adminAccounts(request):
+    return render(request, 'admin/adminAccounts.html')
 
-class CustomLogoutView(View):
-    def get(self, request):
-        logout(request)
-        return redirect('index')  
+def adminService(request):
+    return render(request, 'admin/adminService.html')
+
+def adminCertificates(request):
+    return render(request, 'admin/adminCertificates.html')
+
+def adminEvent(request):
+    return render(request, 'admin/adminEvent.html')
+
+def adminPayment(request):
+    return render(request, 'admin/adminPayment.html')
+
+def adminResident(request):
+    return render(request, 'admin/adminResident.html')
