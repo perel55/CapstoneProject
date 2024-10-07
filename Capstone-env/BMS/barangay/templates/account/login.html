@@ -32,8 +32,8 @@
                 </div>
 
 
-                <form action="/login" method="post">
-                {% csrf_token %}
+                <form action="{% url 'validatelogin' %}" method="post">
+                    {% csrf_token %}
                 
                 <div class="divider">
                     <span>OR</span>

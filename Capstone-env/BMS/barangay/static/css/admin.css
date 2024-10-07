@@ -60,6 +60,27 @@ body {
     font-size: 0.9rem;
 }
 
+.admin-content {
+  padding: 1rem; /* Add some padding for better spacing */
+  background-color: #f9f9f9; /* Light background for contrast */
+  border-radius: 5px; /* Rounded corners */
+  margin: 1rem; /* Add some margin to separate it from other elements */
+  height: calc(90vh - 6rem); /* Adjust height based on the overall layout */
+  overflow-y: auto; /* Enable scrolling if content exceeds the height */
+}
+
+.admin-content h2 {
+  font-size: 1.5rem; /* Adjust font size for the heading */
+  color: #07192a; /* Match heading color with the existing design */
+  margin-bottom: 0.5rem; /* Space below the heading */
+}
+
+.admin-content p {
+  font-size: 1rem; /* Adjust font size for the paragraph */
+  color: #333; /* Dark gray color for the text */
+  line-height: 1.5; /* Improve readability */
+}
+
 .MCT-Right input {
     background-color: var(--input-bg);
     border: none;

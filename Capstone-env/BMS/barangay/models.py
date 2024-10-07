@@ -11,7 +11,7 @@ class Residents(models.Model):
     civil_status = models.CharField(max_length=255)
     occupation = models.CharField(max_length=255)
     age = models.IntegerField(null=True, blank=True)
-    birthdate = models.DateField(max_length=255)
+    birthdate = models.DateField(max_length=255, null=True)
     phone_number = models.CharField(max_length=255)
     picture = models.ImageField(upload_to = 'images/', null=True)
     position = models.CharField(max_length=255)
@@ -55,9 +55,7 @@ class Account_Type(models.Model):
 
 class Accounts(models.Model):
     resident_id = models.ForeignKey(Residents, on_delete=models.CASCADE)
-    bhw_id= models.ForeignKey(Bhw, on_delete=models.CASCADE, blank=False)
-    officials_id= models.ForeignKey(Personnel, on_delete=models.CASCADE, blank=False)
-    account_typeid= models.ForeignKey(Account_Type, on_delete=models.CASCADE, blank=False)
+    account_typeid= models.ForeignKey(Account_Type, on_delete=models.CASCADE, null=True)
 
 def __str__(self):
         return f"{self.resident_id}"

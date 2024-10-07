@@ -63,7 +63,15 @@
             <p>Residents</p>
           </li>
         </a>
-  
+
+        <a href="{% url 'addAdmin' %}">
+          <li class="{% if request.path == '/admin/addAdmin/' %}active{% endif %}">
+            <div class="NavContainer">
+              <img src="../../static/images/accounts.png" alt="">
+            </div>
+            <p>Add Admin</p>
+          </li>
+        </a>
         <a href="{% url 'logout' %}">
           <li>
             <div class="NavContainer">
