@@ -2,6 +2,8 @@ from django.urls import path, re_path
 from .import views
 from django.views.generic import TemplateView
 from django.urls import path, include  # new
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -42,8 +44,16 @@ urlpatterns = [
 
      #----------------------------------------Erwin------------------------------------------------
 
+    re_path(r'^barangay_secretary_dashboard/$', views.barangay_secretary_dashboard, name='barangay_secretary_dashboard'),
+
+    path('add_service/', views.add_service, name='add_service'),
+    path('service_list/', views.service_list, name='service_list'),
+
+    path('service/update/<int:service_id>/', views.update_service, name='update_service'),
+    path('service/delete/<int:service_id>/', views.delete_service, name='delete_service'),
+
+    path('residents/', views.residents_list, name='residents_list'),
 
 
-
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

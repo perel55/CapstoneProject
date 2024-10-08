@@ -1,0 +1,64 @@
+{% load static %}
+
+
+{% include 'barangay_secretary/secretary_nav.html' %}
+
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'css/secretary.css' %}">
+    {% endblock %}
+
+<body>
+    <div class="overall-resident-list">
+        <div class="residents-title-list">
+            <h1 class="residents-list-title">Residents List</h1>
+        </div>
+
+        <div class="resident-list-container">
+            <table class="residents-list-table">
+                <thead class="residents-list-thead">
+                    <tr>
+                        <th>First Name</th>
+                        <th>Middle Name</th>
+                        <th>Last Name</th>
+                        <th>Zone</th>
+                        <th>Civil Status</th>
+                        <th>Occupation</th>
+                        <th>Age</th>
+                        <th>Birthdate</th>
+                        <th>Phone Number</th>
+                        <th>Picture</th>
+                        <th>Position</th>
+                    </tr>
+                </thead>
+                <tbody class="residents-list-tbody">
+                    {% for resident in residents %}
+                    <tr class="resident-row">
+                        <td>{{ resident.fname }}</td>
+                        <td>{{ resident.mname }}</td>
+                        <td>{{ resident.lname }}</td>
+                        <td>{{ resident.zone }}</td>
+                        <td>{{ resident.civil_status }}</td>
+                        <td>{{ resident.occupation }}</td>
+                        <td>{{ resident.age }}</td>
+                        <td>{{ resident.birthdate }}</td>
+                        <td>{{ resident.phone_number }}</td>
+                        <td>
+                            {% if resident.picture %}
+                                <img class="resident-picture" src="{{ resident.picture.url }}" alt="{{ resident.fname }}" width="100">
+                            {% else %}
+                                No Image
+                            {% endif %}
+                        </td>
+                        <td>{{ resident.position }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr class="no-residents-row">
+                        <td colspan="11">No residents available.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

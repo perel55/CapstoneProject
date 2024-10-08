@@ -35,6 +35,22 @@
                 <div class="input-group">
                     <input type="password" id="password2" name="password2" placeholder="Confirm Password" required>
                 </div>
+
+                {% if account_types %}
+                    <div class="input-group">
+                        <label for="account_type">Account Type:</label>
+                        <select id="account_type" name="account_type" required>
+                            <option value="">Select Account Type</option>
+                            {% for account_type in account_types %}
+                                <option value="{{ account_type.id }}">{{ account_type.Account_type }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                {% else %}
+                    <p>No account types available.</p>
+                {% endif %}
+
                 
                 <button type="submit" class="signup-btn">Signup</button>
             </form>
