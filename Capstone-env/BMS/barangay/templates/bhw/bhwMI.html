@@ -1,14 +1,14 @@
 {% load static %}
 {% block css %}
-<link rel="stylesheet" href="{% static './css/try.css' %}">
+<link rel="stylesheet" href="{% static './css/bhw.css' %}">
 {% endblock %}
 
 
  
 {% block content %}  
-    {% include './adminheader.html' %}  
+    {% include './bhwHeader.html' %}  
 
-    {% include './adminNav.html' %}  
+    {% include './bhwNav.html' %}  
     
     <div class="contents">
         <section id="content">
@@ -17,10 +17,10 @@
                     <tr>  
                         <th>ID</th>
                         <th>Service Name</th>  
-                        <th>Price</th>
-                        <th>Descriptions</th>
                         <th>Requirements</th>
-                        <th>Price</th>
+                        <th>Proof</th>
+                        <th>Image</th>
+                        <th>date</th>
                     </tr>
                 </thead>    
                 <tbody>
@@ -28,6 +28,7 @@
                     <tr>    
                         <td></td>
                         <td></td>        
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>

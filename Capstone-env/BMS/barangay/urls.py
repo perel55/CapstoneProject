@@ -2,6 +2,8 @@ from django.urls import path, re_path
 from .import views
 from django.views.generic import TemplateView
 from django.urls import path, include  # new
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -21,6 +23,30 @@ urlpatterns = [
     re_path(r'^adminregister$', views.adminregister, name='adminregister'),
 
 
+
+
+
+
+
+
+    #----------------------------------------Bhw------------------------------------------------
+    re_path(r'^bhwDashboard$', views.bhwDashboard, name='bhwDashboard'),
+    re_path(r'^addBhw$', views.addBhw, name='addBhw'),
+    re_path(r'^bhw/register$', views.bhwregister, name='bhwregister'),
+    re_path(r'^bhw/service$', views.bhwService, name='bhwService'),
+    re_path(r'^bhw/outbreak$', views.bhwOutbreak, name='bhwOutbreak'),
+    re_path(r'^bhw/records$', views.bhwRecord, name='bhwRecord'),
+    re_path(r'^bhw/medic$', views.bhwMedic, name='bhwMedic'),
+    re_path('bhw/addservice/', views.addHealthservice, name = 'addHealthservice'),
+    re_path(r'^resident/service$', views.bhwServices, name='bhwServices'),
+    re_path(r'^bhw/deleteService/(?P<HealthService_id>\d+)/$', views.delete_healthservice, name='delete_healthservice'),
+    re_path(r'^bhw/UpdateService/(?P<HealthService_id>\d+)/$', views.update_healthservice, name='update_healthservice'),
+
+    re_path(r'^bhw/book_healthServiceform/(?P<HealthService_id>\d+)/$', views.book_healthServiceform, name='book_healthServiceform'),
+    re_path(r'^bhw/book_healthService/(?P<HealthService_id>\d+)/$', views.book_healthService, name='book_healthService'),
+    
+    
+    
     
 
 
@@ -45,5 +71,4 @@ urlpatterns = [
 
 
 
-]
-
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

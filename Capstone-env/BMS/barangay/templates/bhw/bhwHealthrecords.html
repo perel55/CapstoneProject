@@ -1,0 +1,50 @@
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static './css/bhw.css' %}">
+{% endblock %}
+
+
+ 
+{% block content %}  
+    {% include './bhwHeader.html' %}  
+
+    {% include './bhwNav.html' %}  
+    
+    <div class="contents">
+        <section id="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Purok</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Phone Number</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for schedule in schedules %}
+                    <tr>
+                        <td>{{ schedule.user.username }}</td>
+                        <td>{{ schedule.fname }}</td>
+                        <td>{{ schedule.lname }}</td>
+                        <td>{{ schedule.purok }}</td>
+                        <td>{{ schedule.date }}</td>
+                        <td>{{ schedule.time }}</td>
+                        <td>{{ schedule.phonenum }}</td>
+                        <td><a href="">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </table>
+        </section>  
+       
+    </div>
+
+   
+</div>
+{% endblock %}
