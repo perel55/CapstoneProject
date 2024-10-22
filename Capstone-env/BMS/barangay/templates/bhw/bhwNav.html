@@ -3,7 +3,7 @@
     <div class="nav-content">
       <ul>
         <a href="{% url 'bhwDashboard'   %}">
-          <li class="{% if request.path == 'bhwDashboard' %}active{% endif %}">
+          <li class="{% if request.path == '/bhwDashboard/' %}active{% endif %}">
             <div class="NavContainer">
               <img src="../../static/images/dash2.png" alt="">
             </div>
@@ -21,7 +21,7 @@
         </a>
 
         <a href="{% url 'bhwService'   %}">
-          <li class="{% if request.path == '/bhw/service/' %}active{% endif %}">
+          <li class="{% if request.path == '/bhwService/' %}active{% endif %}">
             <div class="NavContainer">
               <img src="../../static/images/hservice.png" alt="">
             </div>
@@ -40,7 +40,7 @@
         </a>
 
         <a href="{% url 'bhwOutbreak'   %}">
-          <li class="{% if request.path == '/bhw/outbreak/' %}active{% endif %}">
+          <li class="{% if request.path == '/bhwOutbreak/' %}active{% endif %}">
             <div class="NavContainer">
               <img src="../../static/images/health.png" alt="">
             </div>
@@ -49,7 +49,7 @@
         </a>
 
         <a href="{% url 'bhwRecord'   %}">
-          <li class="{% if request.path == '/admin/resident/' %}active{% endif %}">
+          <li class="{% if request.path == '/bhwRecord/' %}active{% endif %}">
             <div class="NavContainer">
               <img src="../../static/images/medic.png" alt="">
             </div>
@@ -58,7 +58,7 @@
         </a>
 
         <a href="{% url 'bhwMedic'   %}">
-            <li class="{% if request.path == '/admin/resident/' %}active{% endif %}">
+            <li class="{% if request.path == '/bhwMedic/' %}active{% endif %}">
               <div class="NavContainer">
                 <img src="../../static/images/inventory.png" alt="">
               </div>
