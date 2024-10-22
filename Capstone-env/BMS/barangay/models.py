@@ -47,10 +47,9 @@ class Bhw(models.Model):
     position = models.CharField(max_length=255)
 
     def __str__(self):
-        return f"{self.fname} {self.mname} {self.lname} {self.postion}"
+        return f"{self.fname} {self.mname} {self.lname} {self.position}"
 
  
-
 class Account_Type(models.Model):
     Account_type = models.CharField(max_length =255)
     
@@ -62,3 +61,26 @@ class Accounts(models.Model):
     officials_id= models.ForeignKey(Personnel, on_delete=models.CASCADE, null=True)
     resident_id= models.ForeignKey(Residents, on_delete=models.CASCADE, null=True)
     account_typeid= models.ForeignKey(Account_Type, on_delete=models.CASCADE, null=True)
+
+class Services(models.Model):
+
+    service_id = models.AutoField(primary_key=True)
+    service_name = models.CharField(max_length=255)
+    requirements = models.CharField(max_length=255)
+    service_description = models.TextField(null=True)
+    service_price = models.IntegerField(max_length=20)
+    image = models.ImageField(upload_to='images/', null=True)
+    officials_id= models.ForeignKey(Personnel, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return f"{self.service_name} {self.requirements} {self.service_description} "
+
+class HealthService(models.Model):
+    hs_name = models.CharField(max_length=255)
+    hs_requirements = models.CharField(max_length=255)
+    hs_proof = models.CharField(max_length=255)
+    hs_image = models.ImageField(upload_to = 'images/', null=True)
+    hs_date = models.DateField(null=True)
+
+    def __str__(self):
+        return f"{self.hs_name} {self.hs_requirements} {self.hs_proof} "
