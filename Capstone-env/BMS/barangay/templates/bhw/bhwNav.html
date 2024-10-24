@@ -11,12 +11,21 @@
           </li>
         </a>  
   
-        <a href="">
-          <li class="{% if request.path == '/bhw/accounts/' %}active{% endif %}">
+        <a href="{% url 'bhwList' %}">
+          <li class="{% if request.path == '/bhwList/' %}active{% endif %}">
             <div class="NavContainer">
               <img src="../../static/images/hworker.png" alt="">
             </div>
             <p>BHW List</p> 
+          </li> 
+        </a>
+
+        <a href="{% url 'bhwResidentlist' %}">
+          <li class="{% if request.path == '/bhwResidentlist/' %}active{% endif %}">
+            <div class="NavContainer">
+              <img src="../../static/images/residents.png" alt="">
+            </div>
+            <p>Resident List</p> 
           </li> 
         </a>
 
@@ -30,8 +39,8 @@
         </a>
   
     
-        <a href="">
-          <li class="{% if request.path == '/bhw/event/' %}active{% endif %}">
+        <a href="{% url 'bhwEvents' %}">
+          <li class="{% if request.path == '/bhwEvents/' %}active{% endif %}">
             <div class="NavContainer">
               <img src="../../static/images/calendar.png" alt="">
             </div>

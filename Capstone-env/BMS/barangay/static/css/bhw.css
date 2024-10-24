@@ -9,21 +9,23 @@ html {
 }
 
 body {
-  background: #fff;
+  background-color: #f8f8fa;
   font-family: Arial, sans-serif;
-}
+  height: 90vh;
+} 
+
 
 nav {
+  top: 5rem;
+  margin-top: 2.5rem;
   width: 12%;
-  height: 100vh; /* Ensure the sidebar takes full viewport height */
   position: fixed;
-  top: 2.5rem; /* Place below the top bar */
-  left: 0;
-  border-right: 1px solid #d7dde0;
+  top: 2.5rem; 
   display: flex;
   flex-direction: column;
-  padding-top: 1rem;
-  z-index: 1; /* Ensures sidebar is above the content */
+  z-index: 1; 
+  height: 70vh;
+  margin-left: 0.5rem;
 }
 
 .nav-content {
@@ -31,7 +33,11 @@ nav {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(134, 134, 134, 0.3);
 }
+
 
 nav ul {
   list-style: none;
@@ -51,11 +57,9 @@ nav ul li {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #d7dde0;
   border-radius: 5px;
   margin-right: 0.8rem;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
-    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
 nav ul li img {
@@ -76,7 +80,7 @@ nav ul li:hover {
 }
 
 .active {
-  background-color: #92d5f1;
+  background: linear-gradient(#7BC9FF,#7EA1FF);
   color: #fffeff;
 }
 
@@ -85,8 +89,6 @@ nav ul a {
 }
 
 .ac-top {
-  border-top: 1px solid #857b7b;
-  border-bottom: 1px solid #857b7b;
   height: 3.5rem;
   display: flex;
   justify-content: space-between;
@@ -95,8 +97,9 @@ nav ul a {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 2; /* Ensure top bar stays above content */
+  z-index: 2; 
   background-color: #fff;
+  box-shadow: 0 0 10px rgba(80, 79, 79, 0.1);
 }
 
 .ac-left {
@@ -120,10 +123,14 @@ nav ul a {
   width: 15rem;
 }
 
+
+/*---------------------Content---------------------*/
+
 #content {
+  top: 5rem;
+  margin-top: 5rem;
   width: 86%;
   margin-left: 13%; 
-  padding-top: 3.7rem; 
   background-color: #ffff;
   box-shadow: 0 0 10px rgba(134, 134, 134, 0.2);
   border-radius: 10px;
@@ -155,18 +162,24 @@ table td img {
 }
 
 .add {
-  display: inline-block;
-  padding: 0.5rem;
-  background-color: #4caf50;
-  color: white;
-  text-align: center;
-  border-radius: 50%;
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  text-decoration: none;
-  font-size: 1.5rem;
-}
+	background-color: #000000;
+	color: white;
+	border-radius: 50%;
+	font-size: 46px;
+	text-align: center;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	display: block;
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	text-decoration: none;
+  }
+  
+  .add:hover {
+	background-color: #0400eb;
+  }
 
 
 #delete-btn {
@@ -186,169 +199,4 @@ table td img {
   cursor: pointer;    
 }
 
-.add {
-background-color: #000000;
-color: white;
-border-radius: 50%;
-font-size: 46px;
-text-align: center;
-width: 50px;
-height: 50px;
-line-height: 50px;
-display: block;
-position: fixed;
-right: 20px;
-bottom: 20px;
-text-decoration: none;
-}
 
-.add:hover {
-background-color: #0400eb;
-}
-
-
- /*
- .wrapper{
-    background-color: #ffffff;
- }
- #content {
-    padding: 5px;
-
-  
-}  
-.contents{
-    background-color: #ffff;
-    box-shadow: 0 0 10px rgba(134, 134, 134, 0.1);
-    border-radius: 10px;
-    width: 85%;
-    margin-left: 15%;  
-    margin-right: auto;   
-    z-index: 1;
-    
-}
-table {
-    width: 100%;
-    border-collapse: collapse;  
-    margin-left: auto;        
-    margin-right: auto;
-    margin-top: 20px;
-    margin-top: 3%;
-    
-}
-
-thead {
-    background: linear-gradient(#7BC9FF,#7EA1FF);
-}
-
-th, td {
-    padding: 0.5rem;
-    text-align: left;
-    border-bottom: 1px solid #9e9c9c;
-    
-}
-
-
-#delete-btn {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-
-#update-btn {
-    background-color: rgb(17, 190, 17);
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;    
-}
-
-.add {
-	background-color: #000000;
-	color: white;
-	border-radius: 50%;
-	font-size: 46px;
-	text-align: center;
-	width: 50px;
-	height: 50px;
-	line-height: 50px;
-	display: block;
-	position: fixed;
-	right: 20px;
-	bottom: 20px;
-	text-decoration: none;
-  }
-  
-  .add:hover {
-	background-color: #0400eb;
-  }
-  
-  
-  /*approved status form*/
-
-
-/* Style for select element 
-select {
-    width: 50%;
-    padding: 2px;
-    margin-bottom: 15px;
-    border: 1px solid #000000;
-    border-radius: 5px;
-    font-size: 13px;
-}
-
-/* Style for submit button *
-input[type="submit"] {
-    width: 50%;
-    padding: 5px;
-    background-color: #0014f3;
-    color: white;
-    border: none;   
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 13px;
-}
-.booking-status {
-    color: blue;
-}
-/*Total Price*
-.total-price-form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.input-group {
-    margin-bottom: 10px;
-}
-
-.input-group label {
-    font-weight: bold;
-    margin-right: 10px;
-}
-
-.input-group input[type="number"] {
-    padding: 5px;
-    border: 1px solid #000000;
-    border-radius: 3px;
-    width: 90px;
-}
-
-.input-group input[type="submit"] {
-    padding: 8px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 14px;
-    width: 100px;
-}
-
-.input-group input[type="submit"]:hover {
-    background-color: #0056b3;
-}
-    
- 

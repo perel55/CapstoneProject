@@ -222,6 +222,15 @@ def bhwRecord(request):
 def bhwMedic(request):
     return render(request, 'bhw/bhwMI.html')
 
+def bhwResidentlist(request):
+    return render(request, 'bhw/bhwResidentlist.html')
+
+def bhwEvents(request):
+    return render(request, 'bhw/bhwEvents.html')
+
+def bhwList(request):
+    return render(request, 'bhw/bhwList.html')
+
 
 #add service 
 def addHealthservice(request):

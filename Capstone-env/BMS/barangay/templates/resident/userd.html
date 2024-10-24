@@ -1,11 +1,10 @@
 {% load static %}
- 
-  {% include "blog/header.html" %}
-
-  {% block css %}
-  <link rel="stylesheet" href="{% static 'css/login.css' %}">
-  {% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/residentHS.css' %}">
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
 <body>
+    {% include "blog/header.html" %}
 
     <h3>Student Dashboard</h3>
     
