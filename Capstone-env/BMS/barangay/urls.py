@@ -10,7 +10,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     re_path(r'^validatelogin/$', views.validatelogin, name='validatelogin'),
     re_path(r'^register$', views.register, name='register'),
-    re_path(r'^resident/dashboard$', views.residentdashboard, name='residentdashboard'),
+    re_path(r'^residentDashboard/$', views.residentdashboard, name='residentdashboard'),
     re_path('accounts/logout/', views.logout, name='logout'),
     re_path(r'^admindashboard/$', views.admindashboard, name='admindashboard'),
     re_path(r'^admin/accounts/$', views.adminAccounts, name='adminAccounts'),
@@ -41,7 +41,7 @@ urlpatterns = [
     re_path('bhwResidentlist/', views.bhwResidentlist, name = 'bhwResidentlist'),
     re_path('bhwEvents/', views.bhwEvents, name = 'bhwEvents'),
     re_path('bhwList/', views.bhwList, name = 'bhwList'),
-    re_path(r'^resident/service$', views.bhwServices, name='bhwServices'),
+    re_path(r'^resident/service/$', views.bhwServices, name='bhwServices'),
     re_path(r'^bhw/deleteService/(?P<HealthService_id>\d+)/$', views.delete_healthservice, name='delete_healthservice'),
     re_path(r'^bhw/UpdateService/(?P<HealthService_id>\d+)/$', views.update_healthservice, name='update_healthservice'),
 

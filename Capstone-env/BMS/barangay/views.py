@@ -255,9 +255,6 @@ def addHealthservice(request):
         else:
             error_message = "All fields are required."
 
-            return render(request, 'bhw/bhwAddservice.html', {'error': error_message})
-
-    return render(request, 'bhw/bhwAddservice.html')
 
 
 # Service deletion function
