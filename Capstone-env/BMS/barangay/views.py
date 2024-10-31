@@ -15,7 +15,10 @@ from django.views import View
 from .models import HealthService
 from django.contrib.auth.decorators import login_required
 from .models import *
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LogoutView
 # Create your views here.
+
 
 #Register Residents
 @csrf_exempt

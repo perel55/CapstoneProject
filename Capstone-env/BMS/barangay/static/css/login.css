@@ -19,9 +19,9 @@ nav{
 	left: 0;
 	top: 0;
 	width: 100%;
+  padding: 15px;
 	height: 60px;
-	/*background: linear-gradient(#7BC9FF,#7EA1FF);*/
-    background: #fff;
+	background: linear-gradient(#e4e6e8,#d9d9dd);
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
  	z-index: 1;
 }
@@ -41,10 +41,11 @@ nav .navbar .title p{
   }
 nav .navbar .menu{
 	display: flex;
+  align-items: center;
 }
 .navbar .menu li{
 	list-style: none;
-	margin: 0 15px;     
+	margin: 0 15px;
 }           
 .navbar .menu li a{
 	color: rgb(0, 0, 0);
@@ -52,16 +53,51 @@ nav .navbar .menu{
 	font-weight: 500px;
 	font-size: 25px;
 	text-transform: capitalize;
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .navbar ul li a:hover{			
 	color: rgb(31, 99, 244);
-    text-decoration: underline;
+  text-decoration: underline;
 	transition: .4s;
 }
 
-/*----------------------Drowpdown-----------------------*/
+.dropdown ul {
+  list-style: none;
+  background: #e4e6e8;
+}
+
+.dropdown ul li {
+  display: inline;
+  position: relative;
+}
+
+.dropdown ul li a {
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  font-size: 20px;
+}
+
+ul li ul.dropdown li {
+  display: block;
+}
+
+ul li ul.dropdown {
+  width: 10%;
+  background: rgb(219, 222, 219);
+  position: absolute;
+  z-index: 999;
+  display: none;
+}
+
+ul li a:hover {
+  background: #fff;
+}
+
+ul li:hover ul.dropdown {
+  display: block;
+}
 
 /*-------------login wrapper----------------------*/
 .wrapper{

@@ -46,6 +46,11 @@ class Bhw(models.Model):
     phone_number = models.CharField(max_length=255)
     picture = models.ImageField(upload_to = 'images/', null=True)
     position = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.fname} {self.mname} {self.lname} {self.position}"
+
+ 
  
 
 class Account_Type(models.Model):

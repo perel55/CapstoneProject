@@ -1,0 +1,33 @@
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="{% static 'images/logo.png' %}" alt="Logo" class="sidebar-logo"> <!-- Update with your logo -->
+            <h2>Barangay Management System</h2>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="active"><a href="#"><i class="fas fa-home"></i> <span>Home</span></a></li>
+            <li><a href="#"><i class="fas fa-user"></i> <span>Accounts</span></a></li>
+            <li><a href="{% url 'AddService' %}"><i class="fas fa-calendar-alt"></i> <span>Add Services</span></a></li>
+            <li><a href="{% url 'service_list' %}"><i class="fas fa-file-alt"></i> <span>Services</span></a></li>
+            <li><a href="#"><i class="fas fa-calendar"></i> <span>Schedules</span></a></li>
+            <li><a href="#"><i class="fa-solid fa-user"></i> <span>Personnel</span></a></li>
+            <li><a href="#"><i class="fa-regular fa-comment"></i> <span>Comments</span></a></li>
+            <li><a href="#"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <a href="#"><i class="fas fa-question-circle"></i> Help & Support</a>
+        </div>
+
+    </div>
+</body>

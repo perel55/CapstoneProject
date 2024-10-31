@@ -1,5 +1,5 @@
-from django.urls import path, re_path
-from .import views
+from django.urls import path, re_path, include
+from . import views
 from django.views.generic import TemplateView
 from django.urls import path, include  # new
 from django.conf.urls.static import static
