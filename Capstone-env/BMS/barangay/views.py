@@ -15,6 +15,7 @@ from django.views import View
 from .models import HealthService
 from django.contrib.auth.decorators import login_required
 from .models import *
+
 # Create your views here.
 
 #Register Residents
@@ -26,8 +27,18 @@ def register(request):
         password1 = request.POST.get('password')
         password2 = request.POST.get('password2')
 
+        # Check if username or email already exists
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists.")
+            return redirect('register')  # Redirect back to the register page
+        
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Email already exists.")
+            return redirect('register')  # Redirect back to the register page
+
+        # Check if passwords match
         if password1 == password2:
-            user = User.objects.create_superuser(
+            user = User.objects.create_user(
                 username=username,
                 email=email,
                 password=password1,
@@ -44,7 +55,7 @@ def register(request):
                 account_typeid=resident_account_type
             )
 
-
+            # Automatically log the user in after registration
             user = authenticate(request, username=username, password=password1)
             if user is not None:
                 login(request, user)  
@@ -53,7 +64,6 @@ def register(request):
             messages.error(request, "Passwords do not match.")
 
     return render(request, 'account/signup.html')
-
 #Register Admin
 @csrf_exempt
 def adminregister(request):
@@ -232,6 +242,7 @@ def bhwList(request):
     return render(request, 'bhw/bhwList.html')
 
 
+
 #add service 
 def addHealthservice(request):
     if request.method == 'POST':
@@ -297,7 +308,7 @@ def bhwService(request):
     }
     return HttpResponse(template.render(context, request))
 
-
+#service display for resident side 
 def bhwServices(request):
     bhwServices = HealthService.objects.all()
     template = loader.get_template('resident/residentHS.html')
@@ -335,11 +346,15 @@ def book_healthService(request, HealthService_id):
     
         return redirect(reverse('bhwServices'))
 
-    
 
 #display service
 def book_healthServiceform(request, HealthService_id):
     bhwService = HealthService.objects.get(pk=HealthService_id)
     return render(request, 'resident/Hsapplication.html', {'bhwService': bhwService})
 
-
+#display the recent avail service to the resident side
+def residentHistory(request):
+    user = request.user
+    
+    schedules = Schedule.objects.filter(user__username=user.username)
+    return render(request, 'resident/residentHistory.html', {'schedules': schedules})

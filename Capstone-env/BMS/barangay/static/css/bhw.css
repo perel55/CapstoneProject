@@ -118,9 +118,31 @@ nav ul a {
   font-size: 1rem;
 }
 
+.ac-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* space between search bar and welcome message */
+}
+
 .ac-right input {
   padding: 0.2rem;
   width: 15rem;
+  font-size: 1rem; /* Adjust if needed */
+}
+.Accounts a {
+display: inline-block;
+padding: 0.5rem 1rem; /* Adjust padding as needed */
+box-shadow: 0 0 10px rgba(134, 134, 134, 0.2);
+color: #111111; /* Text color */
+border-radius: 5px;
+text-decoration: none;
+font-size: 1rem;
+font-weight: 600;
+white-space: nowrap; /* Prevents text from breaking onto new lines */
+overflow: hidden;
+text-overflow: ellipsis; /* Adds '...' if text is too long */
+max-width: 15rem; /* Set a maximum width to control size */
+background: linear-gradient(#7BC9FF,#7EA1FF);
 }
 
 

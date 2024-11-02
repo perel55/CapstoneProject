@@ -7,20 +7,7 @@
 {% block content %}
 
     <div class="adminContainer">
-        <div class="ac-top">
-            <div class="ac-Left">
-                <img src="../../static/images/lala-logo.jpg" alt="">
-                <h3>Barangay Health Worker</h3>
-            </div>
-
-            <div class="ac-middle">
-            
-            </div>
-
-            <div class="ac-right">
-                <input type="" name="" id="HomeSearch" placeholder="Search"> 
-            </div>
-        </div>
+        {% include 'bhw/bhwTopnav.html' %}
         <div class="MC-Bottom"> 
             {% include './bhwNav.html' %} 
         </div>

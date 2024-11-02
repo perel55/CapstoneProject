@@ -45,18 +45,18 @@ urlpatterns = [
     re_path(r'^bhw/deleteService/(?P<HealthService_id>\d+)/$', views.delete_healthservice, name='delete_healthservice'),
     re_path(r'^bhw/UpdateService/(?P<HealthService_id>\d+)/$', views.update_healthservice, name='update_healthservice'),
 
+   
+    
+    
+    
+    
+
+
+     #----------------------------------------Resident------------------------------------------------
+
     re_path(r'^bhw/book_healthServiceform/(?P<HealthService_id>\d+)/$', views.book_healthServiceform, name='book_healthServiceform'),
     re_path(r'^bhw/book_healthService/(?P<HealthService_id>\d+)/$', views.book_healthService, name='book_healthService'),
-    
-    
-    
-    
-
-
-
-
-
-
+    re_path(r'^residentHistory/$', views.residentHistory, name='residentHistory'),
 
 
 
