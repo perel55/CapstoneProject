@@ -31,14 +31,13 @@ urlpatterns = [
 
     #----------------------------------------Bhw------------------------------------------------
     re_path(r'^bhwDashboard/$', views.bhwDashboard, name='bhwDashboard'),
-    re_path(r'^addBhw$', views.addBhw, name='addBhw'),
-    re_path(r'^bhwregister/$', views.bhwregister, name='bhwregister'),
+    re_path(r'^addBhw/$', views.addBhw, name='addBhw'),
+    re_path(r'^bhwregister$', views.bhwregister, name='bhwregister'),
     re_path(r'^bhwService/$', views.bhwService, name='bhwService'),
     re_path(r'^bhwOutbreak/$', views.bhwOutbreak, name='bhwOutbreak'),
     re_path(r'^bhwRecord/$', views.bhwRecord, name='bhwRecord'),
     re_path(r'^bhwMedic/$', views.bhwMedic, name='bhwMedic'),
     re_path('bhw/addservice/', views.addHealthservice, name = 'addHealthservice'),
-    re_path('bhwResidentlist/', views.bhwResidentlist, name = 'bhwResidentlist'),
     re_path('bhwEvents/', views.bhwEvents, name = 'bhwEvents'),
     re_path('bhwList/', views.bhwList, name = 'bhwList'),
     re_path(r'^resident/service/$', views.bhwServices, name='bhwServices'),

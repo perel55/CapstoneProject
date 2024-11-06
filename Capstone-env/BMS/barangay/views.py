@@ -15,6 +15,7 @@ from django.views import View
 from .models import HealthService
 from django.contrib.auth.decorators import login_required
 from .models import *
+from django.db.models import Prefetch
 
 # Create your views here.
 
@@ -80,15 +81,15 @@ def adminregister(request):
                 password=password1,
             )
 
-            resident = Residents.objects.create(
+            personnel = Personnel.objects.create(
                 auth_user=user,
             )
 
-            resident_account_type = Account_Type.objects.get(Account_type='Admin')
+            personnel_account_type = Account_Type.objects.get(Account_type='Admin')
 
             newAcc = Accounts.objects.create(
-                resident_id=resident,
-                account_typeid=resident_account_type
+                admin_id=personnel,
+                account_typeid=personnel_account_type
             )
 
 
@@ -192,15 +193,15 @@ def bhwregister(request):
                 password=password1,
             )
 
-            resident = Residents.objects.create(
+            bhw = Bhw.objects.create(
                 auth_user=user,
             )
 
-            resident_account_type = Account_Type.objects.get(Account_type='Bhw')
+            bhw_account_type = Account_Type.objects.get(Account_type='Bhw')
 
             newAcc = Accounts.objects.create(
-                resident_id=resident,
-                account_typeid=resident_account_type
+                bhw_id=bhw,
+                account_typeid=bhw_account_type
             )
 
 
@@ -232,14 +233,57 @@ def bhwRecord(request):
 def bhwMedic(request):
     return render(request, 'bhw/bhwMI.html')
 
-def bhwResidentlist(request):
-    return render(request, 'bhw/bhwResidentlist.html')
 
 def bhwEvents(request):
     return render(request, 'bhw/bhwEvents.html')
 
+@login_required
 def bhwList(request):
-    return render(request, 'bhw/bhwList.html')
+    # Retrieve session data
+    account_type = request.session.get('account_type', None)
+
+    # Query Bhw accounts
+    bhws = Bhw.objects.filter(
+        auth_user__isnull=False,
+    ).prefetch_related(
+        Prefetch(
+            'accounts_set', 
+            queryset=Accounts.objects.filter(account_typeid__Account_type='Bhw')
+        )
+    )
+
+    # Query Residents accounts
+    residents = Residents.objects.filter(
+        auth_user__isnull=False
+    ).prefetch_related(
+        Prefetch(
+            'accounts_set', 
+            queryset=Accounts.objects.filter(account_typeid__Account_type='Resident')
+        )
+    )
+
+    # Query Officials accounts
+    officials = Personnel.objects.filter(
+        auth_user__isnull=False
+    ).prefetch_related(
+        Prefetch(
+            'accounts_set', 
+            queryset=Accounts.objects.filter(account_typeid__Account_type='Admin')
+        )
+    )
+
+    # Prepare context data
+    context = {
+        'account_type': account_type,
+        'bhws': bhws,
+        'residents': residents,
+        'officials': officials,
+    }
+
+    # Render the template with context
+    return render(request, 'bhw/bhwList.html', context)
+
+
 
 
 
@@ -357,3 +401,4 @@ def residentHistory(request):
     
     schedules = Schedule.objects.filter(user__username=user.username)
     return render(request, 'resident/residentHistory.html', {'schedules': schedules})
+
