@@ -1,0 +1,92 @@
+/* Basic body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Light background for contrast */
+}
+
+/* Main container styling */
+.main-div {
+    text-align: center;
+    margin: 40px auto; /* Center the container */
+    max-width: 1200px; /* Max width for large screens */
+    padding: 20px;
+}
+
+/* Grid container styling */
+.grid-container {
+    display: grid; /* Enable grid layout */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Space between items */
+}
+
+/* Individual grid item styling */
+.grid-item {
+    display: flex; /* Use flexbox to center the card */
+    justify-content: center; /* Center items horizontally */
+}
+
+/* Card styling */
+.card {
+    width: 300px; /* Fixed width for all cards */
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly deeper shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    overflow: hidden; /* Hide overflow for rounded corners */
+    background-color: white; /* Card background */
+    display: flex; /* Use flexbox to arrange card content */
+    flex-direction: column; /* Stack children vertically */
+}
+
+/* Card hover effect */
+.card:hover {
+    transform: translateY(-10px); /* Slight lift on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
+}
+
+/* Image styling */
+.card-img-top {
+    height: 150px; /* Fixed height for uniformity */
+    object-fit: cover; /* Ensure the image covers the area */
+}
+
+/* Card body styling */
+.card-body {
+    padding: 20px;
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Arrange items vertically */
+    flex-grow: 1; /* Allow the body to take up remaining space */
+    justify-content: space-between; /* Space out title, text, and button */
+}
+
+/* Card title styling */
+.card-title {
+    font-size: 18px; /* Slightly smaller font size */
+    margin-bottom: 5px; /* Reduced margin for better alignment */
+    color: #333; /* Darker color for better readability */
+}
+
+/* Card text styling */
+.card-text {
+    font-size: 14px;
+    color: #666; /* Gray color for description */
+    flex-grow: 1; /* Allow text to expand */
+    margin: 0; /* Remove margin to prevent uneven spacing */
+    display: flex; /* Make card-text a flex container */
+    align-items: flex-start; /* Align text to the top */
+}
+
+/* Button styling */
+.btn-primary {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #FF512F; /* Vibrant button color */
+    border: none;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s; /* Smooth transition */
+    margin-top: 10px; /* Space between text and button */
+}
+
+.btn-primary:hover {
+    background-color: #FF7733; /* Change color on hover */
+}
