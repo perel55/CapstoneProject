@@ -211,35 +211,35 @@ def bhwregister(request):
         else:
             messages.error(request, "Passwords do not match.")
 
-    return render(request, 'bhwSecretary/addBhw.html')
+    return render(request, 'bhw/addBhw.html')
 
 def bhwDashboard(request):
-    return render(request, 'bhwSecretary/bhwDashboard.html')
+    return render(request, 'bhw/bhwDashboard.html')
 
 def addBhw(request):
-    return render(request, 'bhwSecretary/addBhw.html')
+    return render(request, 'bhw/addBhw.html')
 
 
 def bhwOutbreak(request):
-    return render(request, 'bhwSecretary/bhwOutbreaks.html')
+    return render(request, 'bhw/bhwOutbreaks.html')
 
 #fetch Health records in bhw side
 @login_required
 def bhwRecord(request):
     schedules = Schedule.objects.all()  # Fetch all schedules
-    return render(request, 'bhwSecretary/bhwHealthrecords.html', {'schedules': schedules})
+    return render(request, 'bhw/bhwHealthrecords.html', {'schedules': schedules})
 
 def bhwMedic(request):
-    return render(request, 'bhwSecretary/bhwMI.html')
+    return render(request, 'bhw/bhwMI.html')
 
 def bhwResidentlist(request):
-    return render(request, 'bhwSecretary/bhwResidentlist.html')
+    return render(request, 'bhw/bhwResidentlist.html')
 
 def bhwEvents(request):
-    return render(request, 'bhwSecretary/bhwEvents.html')
+    return render(request, 'bhw/bhwEvents.html')
 
 def bhwList(request):
-    return render(request, 'bhwSecretary/bhwList.html')
+    return render(request, 'bhw/bhwList.html')
 
 
 
@@ -275,7 +275,7 @@ def delete_healthservice(request, HealthService_id):
     if request.method == 'POST':
         bhwService.delete()
         return redirect('bhwService')  
-    return render(request, 'bhwSecretary/bhwDeleteservice.html', {'bhwService': bhwService})
+    return render(request, 'bhw/bhwDeleteservice.html', {'bhwService': bhwService})
 
 #Update Health Service
 def update_healthservice(request, HealthService_id):
@@ -296,12 +296,12 @@ def update_healthservice(request, HealthService_id):
         
         return redirect('bhwService')
    
-    return render(request, 'bhwSecretary/bhwUpdateservice.html', { 'bhwService': bhwService})
+    return render(request, 'bhw/bhwUpdateservice.html', { 'bhwService': bhwService})
 
 #-------------------Resident Side-------------------
 def bhwService(request):
     bhwService = HealthService.objects.all()
-    template = loader.get_template('bhwSecretary/bhwService.html')
+    template = loader.get_template('bhw/bhwService.html')
     context = {
         'bhwService': bhwService,
     }
