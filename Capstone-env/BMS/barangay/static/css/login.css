@@ -305,6 +305,19 @@ nav .navbar .menu{
   
 
 
+
+
+/* Error message style */
+.message.error p {
+    background-color: #e74c3c;
+    border-left: 5px solid #c0392b;
+}
+
+/* Success message style */
+.message.success {
+    background-color: #2ecc71;
+    border-left: 5px solid #27ae60;
+}
 /*
 
 .container{

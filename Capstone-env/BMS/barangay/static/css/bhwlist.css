@@ -193,8 +193,8 @@
   }
   
   table th, table td {
-    border-bottom: 1px solid #ddd;
-    padding: 0.5rem;
+    border-bottom: 1px solid #e9e6e6;
+    padding: 1rem;
     
   }
   
@@ -249,7 +249,7 @@
     cursor: pointer;    
   }
   
-  
+/*
   #BhwAcc-Area {
     width: 100%;
     border: none;
@@ -264,7 +264,7 @@
     background-color: #fff;
   }
   
-  #ResidentsAcc-Area {
+  #ResidentsAcc-Area{
     width: 100%;
     border: none;
     display: none;
@@ -272,3 +272,4 @@
     border-bottom: 1px solid #ddd;
     padding: 0.5rem;
   }
+ */   

@@ -102,7 +102,6 @@ def adminregister(request):
 
     return render(request, 'admin/addAdmin.html')
 
-#login
 @csrf_exempt
 def validatelogin(request):
     if request.method == 'POST':
@@ -114,10 +113,17 @@ def validatelogin(request):
         if user is not None:
             login(request, user)
             
-            try:
+            # Find the correct profile based on user type
+            profile = None
+            if Accounts.objects.filter(resident_id__auth_user=user).exists():
                 profile = Accounts.objects.get(resident_id__auth_user=user)
-                account_type = profile.account_typeid.Account_type
+            elif Accounts.objects.filter(bhw_id__auth_user=user).exists():
+                profile = Accounts.objects.get(bhw_id__auth_user=user)
+            elif Accounts.objects.filter(admin_id__auth_user=user).exists():
+                profile = Accounts.objects.get(admin_id__auth_user=user)
 
+            if profile:
+                account_type = profile.account_typeid.Account_type
                 if account_type == 'Resident':
                     return redirect('residentdashboard')
                 elif account_type == 'Admin':
@@ -126,15 +132,17 @@ def validatelogin(request):
                     return redirect('bhwDashboard')
                 else:
                     return redirect('defaultdashboard')
-
-            except Accounts.DoesNotExist:
-                messages.error(request, "User profile not found.")
+            else:
+                # If no profile is found, treat it as an invalid login
+                messages.error(request, "Invalid username or password.")
                 return redirect('login')
-
         else:
             messages.error(request, "Invalid username or password.")
+            return redirect('login')
     
     return render(request, 'account/login.html')
+
+
 
 
 def index(request):
@@ -237,8 +245,8 @@ def bhwMedic(request):
 def bhwEvents(request):
     return render(request, 'bhw/bhwEvents.html')
 
-@login_required
-def bhwList(request):
+
+def bhwList(request):   
     # Retrieve session data
     account_type = request.session.get('account_type', None)
 
