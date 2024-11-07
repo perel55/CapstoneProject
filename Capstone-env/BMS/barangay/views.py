@@ -15,9 +15,15 @@ from django.views import View
 from .models import HealthService
 from django.contrib.auth.decorators import login_required
 from .models import *
+<<<<<<< HEAD
 from django.db.models import Prefetch
 
+=======
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LogoutView
+>>>>>>> 0c74f875ec336d9d62f0439d6d9594ce0a631d0f
 # Create your views here.
+
 
 #Register Residents
 @csrf_exempt

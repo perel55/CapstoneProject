@@ -12,21 +12,20 @@
         <nav>
             <div class="navbar">
                 <div class="title"><p>Barangay Lala Proper</p></div>	
+                <ul class="menu">
+                    <li>
+                    <a href="#">Services 🠻</a>
+                    <ul class="dropdown">
+                    <li><a href="#">Administrative </a></li>
+                    <li><a href="#">Health </a></li>
+                    </ul>
+                    </li>
 
-                <div class="icon">
-                    <input type="" name="" id="HomeSearch" placeholder="Search"> 
-                    <div class="dropdown">
-                        <div class="user" alt="Menu">Welcome, {% user_display user %}</div>
-                        <div class="dropdown-content">
-                            <a href="">Update Profile</a>
-                            <a href="">Settings</a>
-                            <a href="">Events</a>
-                            <a href="">Administrative Service</a>
-                            <a href="{% url 'bhwServices' %}">Health Service</a>
-                            <a href="{% url 'logout' %}">Signout</a>
-                        </div>
-                    </div>
-                </div>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="{% url 'logout' %}">Signout</a></li>
+                </ul>
             </div>
         </nav>	
       </header>
