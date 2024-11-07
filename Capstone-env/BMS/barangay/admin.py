@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Accounts, Residents, Bhw, Account_Type, Personnel, HealthService, Schedule
+from .views.models import Accounts, Residents, Bhw, Account_Type, Personnel, HealthService, Schedule
+
+
 
 # Register your models here.
 admin.site.register(Accounts)

@@ -69,6 +69,12 @@ urlpatterns = [
 
 
      #----------------------------------------Erwin------------------------------------------------
+    re_path(r'^AddService/$', views.AddService, name='AddService'),
+    re_path(r'^service_list/$', views.service_list, name='service_list'),
+    re_path(r'^service/update/<int:service_id>/$', views.update_service, name='update_service'),
+    re_path(r'^service/delete/<int:service_id>/$', views.delete_service, name='delete_service'),
+    re_path(r'^administrative-services/$', views.administrative_services_list, name='administrative_services_list'),
+    re_path(r'^health-services/$', views.health_services_list, name='health_services_list'),
 
 
 

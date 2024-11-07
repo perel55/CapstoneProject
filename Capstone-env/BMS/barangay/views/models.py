@@ -90,3 +90,16 @@ class Schedule(models.Model):
  
     def __str__(self):
         return f"{self.fname} {self.lname} {self.phonenum}  {self.date}"
+    
+    
+class Services(models.Model):
+    service_id = models.AutoField(primary_key=True)
+    service_name = models.CharField(max_length=255)
+    requirements = models.CharField(max_length=255)
+    service_description = models.TextField(null=True)
+    service_price = models.IntegerField(null=True)
+    image = models.ImageField(upload_to='images/', null=True)
+    officials_id= models.ForeignKey(Personnel, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return f"{self.service_name} {self.requirements} {self.service_description} "

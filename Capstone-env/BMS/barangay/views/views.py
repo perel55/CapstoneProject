@@ -19,6 +19,7 @@ from django.db.models import Prefetch
 
 # Create your views here.
 
+
 #Register Residents
 @csrf_exempt
 def register(request):
