@@ -15,6 +15,8 @@ from django.views import View
 from .models import HealthService
 from django.contrib.auth.decorators import login_required
 from .models import *
+from django.db.models import Prefetch
+
 # Create your views here.
 
 #Register Residents
@@ -26,8 +28,18 @@ def register(request):
         password1 = request.POST.get('password')
         password2 = request.POST.get('password2')
 
+        # Check if username or email already exists
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists.")
+            return redirect('register')  # Redirect back to the register page
+        
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Email already exists.")
+            return redirect('register')  # Redirect back to the register page
+
+        # Check if passwords match
         if password1 == password2:
-            user = User.objects.create_superuser(
+            user = User.objects.create_user(
                 username=username,
                 email=email,
                 password=password1,
@@ -44,7 +56,7 @@ def register(request):
                 account_typeid=resident_account_type
             )
 
-
+            # Automatically log the user in after registration
             user = authenticate(request, username=username, password=password1)
             if user is not None:
                 login(request, user)  
@@ -53,7 +65,6 @@ def register(request):
             messages.error(request, "Passwords do not match.")
 
     return render(request, 'account/signup.html')
-
 #Register Admin
 @csrf_exempt
 def adminregister(request):
@@ -70,15 +81,15 @@ def adminregister(request):
                 password=password1,
             )
 
-            resident = Residents.objects.create(
+            personnel = Personnel.objects.create(
                 auth_user=user,
             )
 
-            resident_account_type = Account_Type.objects.get(Account_type='Admin')
+            personnel_account_type = Account_Type.objects.get(Account_type='Admin')
 
             newAcc = Accounts.objects.create(
-                resident_id=resident,
-                account_typeid=resident_account_type
+                admin_id=personnel,
+                account_typeid=personnel_account_type
             )
 
 
@@ -91,7 +102,6 @@ def adminregister(request):
 
     return render(request, 'admin/addAdmin.html')
 
-#login
 @csrf_exempt
 def validatelogin(request):
     if request.method == 'POST':
@@ -103,10 +113,17 @@ def validatelogin(request):
         if user is not None:
             login(request, user)
             
-            try:
+            # Find the correct profile based on user type
+            profile = None
+            if Accounts.objects.filter(resident_id__auth_user=user).exists():
                 profile = Accounts.objects.get(resident_id__auth_user=user)
-                account_type = profile.account_typeid.Account_type
+            elif Accounts.objects.filter(bhw_id__auth_user=user).exists():
+                profile = Accounts.objects.get(bhw_id__auth_user=user)
+            elif Accounts.objects.filter(admin_id__auth_user=user).exists():
+                profile = Accounts.objects.get(admin_id__auth_user=user)
 
+            if profile:
+                account_type = profile.account_typeid.Account_type
                 if account_type == 'Resident':
                     return redirect('residentdashboard')
                 elif account_type == 'Admin':
@@ -115,15 +132,17 @@ def validatelogin(request):
                     return redirect('bhwDashboard')
                 else:
                     return redirect('defaultdashboard')
-
-            except Accounts.DoesNotExist:
-                messages.error(request, "User profile not found.")
+            else:
+                # If no profile is found, treat it as an invalid login
+                messages.error(request, "Invalid username or password.")
                 return redirect('login')
-
         else:
             messages.error(request, "Invalid username or password.")
+            return redirect('login')
     
     return render(request, 'account/login.html')
+
+
 
 
 def index(request):
@@ -166,7 +185,7 @@ def addAdmin(request):
 
 
 
-#-------------------BHW-------------------
+#-------------------BHW Secretary & Nurse-------------------
 @csrf_exempt
 def bhwregister(request):
     if request.method == 'POST':
@@ -182,15 +201,15 @@ def bhwregister(request):
                 password=password1,
             )
 
-            resident = Residents.objects.create(
+            bhw = Bhw.objects.create(
                 auth_user=user,
             )
 
-            resident_account_type = Account_Type.objects.get(Account_type='Bhw')
+            bhw_account_type = Account_Type.objects.get(Account_type='Bhw')
 
             newAcc = Accounts.objects.create(
-                resident_id=resident,
-                account_typeid=resident_account_type
+                bhw_id=bhw,
+                account_typeid=bhw_account_type
             )
 
 
@@ -222,14 +241,58 @@ def bhwRecord(request):
 def bhwMedic(request):
     return render(request, 'bhw/bhwMI.html')
 
-def bhwResidentlist(request):
-    return render(request, 'bhw/bhwResidentlist.html')
 
 def bhwEvents(request):
     return render(request, 'bhw/bhwEvents.html')
 
-def bhwList(request):
-    return render(request, 'bhw/bhwList.html')
+
+def bhwList(request):   
+    # Retrieve session data
+    account_type = request.session.get('account_type', None)
+
+    # Query Bhw accounts
+    bhws = Bhw.objects.filter(
+        auth_user__isnull=False,
+    ).prefetch_related(
+        Prefetch(
+            'accounts_set', 
+            queryset=Accounts.objects.filter(account_typeid__Account_type='Bhw')
+        )
+    )
+
+    # Query Residents accounts
+    residents = Residents.objects.filter(
+        auth_user__isnull=False
+    ).prefetch_related(
+        Prefetch(
+            'accounts_set', 
+            queryset=Accounts.objects.filter(account_typeid__Account_type='Resident')
+        )
+    )
+
+    # Query Officials accounts
+    officials = Personnel.objects.filter(
+        auth_user__isnull=False
+    ).prefetch_related(
+        Prefetch(
+            'accounts_set', 
+            queryset=Accounts.objects.filter(account_typeid__Account_type='Admin')
+        )
+    )
+
+    # Prepare context data
+    context = {
+        'account_type': account_type,
+        'bhws': bhws,
+        'residents': residents,
+        'officials': officials,
+    }
+
+    # Render the template with context
+    return render(request, 'bhw/bhwList.html', context)
+
+
+
 
 
 #add service 
@@ -287,8 +350,7 @@ def update_healthservice(request, HealthService_id):
    
     return render(request, 'bhw/bhwUpdateservice.html', { 'bhwService': bhwService})
 
-
-#service display for admin side 
+#-------------------Resident Side-------------------
 def bhwService(request):
     bhwService = HealthService.objects.all()
     template = loader.get_template('bhw/bhwService.html')
@@ -297,7 +359,7 @@ def bhwService(request):
     }
     return HttpResponse(template.render(context, request))
 
-
+#service display for resident side 
 def bhwServices(request):
     bhwServices = HealthService.objects.all()
     template = loader.get_template('resident/residentHS.html')
@@ -335,11 +397,16 @@ def book_healthService(request, HealthService_id):
     
         return redirect(reverse('bhwServices'))
 
-    
 
 #display service
 def book_healthServiceform(request, HealthService_id):
     bhwService = HealthService.objects.get(pk=HealthService_id)
     return render(request, 'resident/Hsapplication.html', {'bhwService': bhwService})
 
+#display the recent avail service to the resident side
+def residentHistory(request):
+    user = request.user
+    
+    schedules = Schedule.objects.filter(user__username=user.username)
+    return render(request, 'resident/residentHistory.html', {'schedules': schedules})
 

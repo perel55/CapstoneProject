@@ -20,15 +20,6 @@
           </li> 
         </a>
 
-        <a href="{% url 'bhwResidentlist' %}">
-          <li class="{% if request.path == '/bhwResidentlist/' %}active{% endif %}">
-            <div class="NavContainer">
-              <img src="../../static/images/residents.png" alt="">
-            </div>
-            <p>Resident List</p> 
-          </li> 
-        </a>
-
         <a href="{% url 'bhwService'   %}">
           <li class="{% if request.path == '/bhwService/' %}active{% endif %}">
             <div class="NavContainer">
@@ -48,7 +39,7 @@
           </li>
         </a>
 
-        <a href="{% url 'bhwOutbreak'   %}">
+        <a href="{% url 'bhwOutbreak' %}">
           <li class="{% if request.path == '/bhwOutbreak/' %}active{% endif %}">
             <div class="NavContainer">
               <img src="../../static/images/health.png" alt="">

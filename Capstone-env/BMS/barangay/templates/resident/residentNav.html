@@ -20,12 +20,12 @@
             </li> 
           </a>
   
-        <a href="">
-          <li class="{% if request.path == '/bhwResidentlist/' %}active{% endif %}">
+        <a href="{% url 'residentHistory' %}">
+          <li class="{% if request.path == '/residentHistory/' %}active{% endif %}">
             <div class="NavContainer">
               <img src="../../static/images/recent-sched.png" alt="">
             </div>
-            <p>Recent Schedule</p> 
+            <p>History</p> 
           </li> 
         </a>
 
