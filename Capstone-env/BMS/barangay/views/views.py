@@ -17,6 +17,7 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from django.db.models import Prefetch
 
+
 # Create your views here.
 
 
@@ -230,8 +231,51 @@ def addBhw(request):
     return render(request, 'bhw/addBhw.html')
 
 
-def bhwOutbreak(request):
-    return render(request, 'bhw/bhwOutbreaks.html')
+def bhwOutbreak(request): 
+    # For GET requests, render the template with existing outbreak data
+    outbreaks = Outbreaks.objects.all()  # Retrieve all outbreaks to display on the page
+    return render(request, 'bhw/bhwOutbreaks.html', {'outbreaks': outbreaks})
+
+def addOutbreak(request):
+     if request.method == "POST":
+        # Retrieve form data from the POST request
+        outbreak_name = request.POST.get('outbreak_name')
+        outbreak_type = request.POST.get('outbreak_type')
+        total_cases = request.POST.get('total_cases')
+        purok = request.POST.get('purok')
+        severity = request.POST.get('severity')
+
+        # Create a new Outbreak instance and save it
+        Outbreaks.objects.create(
+            outbreak_name=outbreak_name,
+            outbreak_type=outbreak_type,
+            total_cases=total_cases,
+            purok=purok,
+            severity=severity,
+             
+        )
+        
+        return redirect('bhwOutbreak')  # Redirect after successful submission
+     
+def update_outbreak(request):
+    if request.method == "POST":
+        outbreak_id = request.POST.get('outbreak_id')  # Get the outbreak ID from the form
+        outbreak = get_object_or_404(Outbreaks, id=outbreak_id)  # Get the outbreak object
+
+        # Get the updated data from the POST request
+        outbreak.outbreak_name = request.POST.get('outbreak_name')
+        outbreak.outbreak_type = request.POST.get('outbreak_type')
+        outbreak.total_cases = request.POST.get('total_cases')
+        outbreak.purok = request.POST.get('purok')
+        outbreak.severity = request.POST.get('severity')
+
+        # Save the updated outbreak object
+        outbreak.save()
+
+        # Redirect to the appropriate page after update (e.g., a list of outbreaks)
+        return redirect('bhwOutbreak')  # Replace with the actual view that shows all outbreaks
+
+    return HttpResponse("Invalid method", status=405)  # Handle other methods if necessary
 
 #fetch Health records in bhw side
 @login_required

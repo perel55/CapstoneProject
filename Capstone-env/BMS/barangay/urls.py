@@ -38,11 +38,14 @@ urlpatterns = [
     re_path(r'^bhwRecord/$', views.bhwRecord, name='bhwRecord'),
     re_path(r'^bhwMedic/$', views.bhwMedic, name='bhwMedic'),
     re_path('bhw/addservice/', views.addHealthservice, name = 'addHealthservice'),
+    re_path('bhw/addOutbreak/', views.addOutbreak, name = 'addOutbreak'),
     re_path('bhwEvents/', views.bhwEvents, name = 'bhwEvents'),
     re_path('bhwList/', views.bhwList, name = 'bhwList'),
     re_path(r'^resident/service/$', views.bhwServices, name='bhwServices'),
     re_path(r'^bhw/deleteService/(?P<HealthService_id>\d+)/$', views.delete_healthservice, name='delete_healthservice'),
     re_path(r'^bhw/UpdateService/(?P<HealthService_id>\d+)/$', views.update_healthservice, name='update_healthservice'),
+      re_path(r'^update-outbreak/$', views.update_outbreak, name='updateOutbreak'),
+
 
    
     

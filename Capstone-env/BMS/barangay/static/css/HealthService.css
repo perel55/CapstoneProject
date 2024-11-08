@@ -1,5 +1,5 @@
- /* Modal overlay style */
- #Modal-Category-Overlay {
+/* Modal overlay style */
+#Modal-Category-Overlay {
     display: none;
     position: fixed;
     top: 0;
@@ -11,6 +11,7 @@
     align-items: center;
     z-index: 10;
 }
+
 /* Modal content container */
 #CO-Container {
     background: #fff;
@@ -20,13 +21,13 @@
     max-width: 90%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 /* Close button and submit styling */
 #cancel-category, #add-category {
     margin: 10px;
     padding: 8px 16px;
     cursor: pointer;
 }
-
 
 /* Title styling */
 .CO-Top h3 {
@@ -56,11 +57,18 @@ input[type="file"] {
     color: #333;
     border: 1px solid #ced4da;
     border-radius: 8px;
-    padding: 10px 12px;
+    padding: 12px 14px; /* Increased padding for a larger height */
     width: 100%;
     font-size: 1rem;
     outline: none;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    height: 48px; /* Adjust height for uniform input fields */
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+textarea {
+    height: 120px; /* Adjusted height for text areas */
+    resize: vertical; /* Allows vertical resizing */
 }
 
 input:focus,

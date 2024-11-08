@@ -103,3 +103,14 @@ class Services(models.Model):
 
     def __str__(self):
         return f"{self.service_name} {self.requirements} {self.service_description} "
+    
+class Outbreaks(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    outbreak_name = models.CharField(max_length=100)
+    outbreak_type = models.CharField(max_length=100)  
+    total_cases =  models.IntegerField(null=True, blank=True)
+    purok = models.CharField(max_length=100, null=True)
+    severity = models.CharField(max_length=100, null=True)   
+
+    def __str__(self):
+        return f"{self.outbreak_name} {self.outbreak_type} {self.purok} "
