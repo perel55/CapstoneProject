@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'barangay',
+    'crispy_forms',
 
     'django.contrib.sites', 
     'allauth',
@@ -160,7 +161,10 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/profile-check/'
+ACCOUNT_SIGNUP_REDIRECT_URL = '/profile-check/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4' 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

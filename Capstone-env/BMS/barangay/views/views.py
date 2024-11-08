@@ -16,11 +16,11 @@ from .models import HealthService
 from django.contrib.auth.decorators import login_required
 from .models import *
 from django.db.models import Prefetch
+from .forms import ResidentProfileForm
 
 # Create your views here.
 
 
-#Register Residents
 @csrf_exempt
 def register(request):
     if request.method == 'POST':
@@ -29,43 +29,35 @@ def register(request):
         password1 = request.POST.get('password')
         password2 = request.POST.get('password2')
 
-        # Check if username or email already exists
         if User.objects.filter(username=username).exists():
             messages.error(request, "Username already exists.")
-            return redirect('register')  # Redirect back to the register page
+            return redirect('register')
         
         if User.objects.filter(email=email).exists():
             messages.error(request, "Email already exists.")
-            return redirect('register')  # Redirect back to the register page
+            return redirect('register')
 
-        # Check if passwords match
         if password1 == password2:
             user = User.objects.create_user(
                 username=username,
                 email=email,
                 password=password1,
             )
-
-            resident = Residents.objects.create(
-                auth_user=user,
-            )
-
+            resident = Residents.objects.create(auth_user=user)
             resident_account_type = Account_Type.objects.get(Account_type='Resident')
-
-            newAcc = Accounts.objects.create(
-                resident_id=resident,
-                account_typeid=resident_account_type
-            )
+            Accounts.objects.create(resident_id=resident, account_typeid=resident_account_type)
 
             # Automatically log the user in after registration
             user = authenticate(request, username=username, password=password1)
             if user is not None:
-                login(request, user)  
-                return redirect('residentdashboard')
+                login(request, user)
+                return redirect('residentdashboard')  # Redirect to resident dashboard
         else:
             messages.error(request, "Passwords do not match.")
 
     return render(request, 'account/signup.html')
+
+
 #Register Admin
 @csrf_exempt
 def adminregister(request):
@@ -153,8 +145,37 @@ def signup(request):
   template = loader.get_template('accounts/signup.html')
   return HttpResponse(template.render())
 
+@login_required
 def residentdashboard(request):
-    return render(request, 'resident/userd.html')
+    resident = Residents.objects.filter(auth_user=request.user).first()
+
+    # Check if profile is incomplete
+    if resident and not resident.is_profile_complete:
+        if request.method == 'POST':
+            resident.fname = request.POST.get('fname')
+            resident.mname = request.POST.get('mname')
+            resident.lname = request.POST.get('lname')
+            resident.zone = request.POST.get('zone')
+            resident.civil_status = request.POST.get('civil_status')
+            resident.occupation = request.POST.get('occupation')
+            resident.age = request.POST.get('age') or None  # Handle null values
+            resident.birthdate = request.POST.get('birthdate')
+            resident.phone_number = request.POST.get('phone_number')
+            resident.position = request.POST.get('position')
+            
+            if 'picture' in request.FILES:
+                resident.picture = request.FILES['picture']
+            
+            resident.is_profile_complete = True
+            resident.save()
+            return redirect('residentdashboard')  # Reload dashboard after saving
+
+        return render(request, 'resident/userd.html', {'resident': resident, 'show_modal': True})
+
+    # Render dashboard normally if profile is complete
+    return render(request, 'resident/userd.html', {'show_modal': False})
+
+
 
 
 
